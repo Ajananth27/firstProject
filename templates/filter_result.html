@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .navbar {
+            margin-bottom: 50px;
+            background-color: #c2e4b1;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+        }
+        .table {
+            margin-top: 4%;
+            table-layout: auto;
+        }
+
+        #data {
+            margin-top: 4%;
+        }
+        
+        
+        
+    </style>
+  </head>
+  <body>
+    <div class="navAdmin">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar-header">
+                <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
+            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="#">back</a></li> -->
+                <li><a href="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- <div class="row"> -->
+    <div class="col-md-4" id = "data" data-spy="scroll" style="width: 500px; height: 700px; overflow:scroll;">
+        {% for i in result_data %}   
+        <div class="container-fluid well">
+            <a href="{% url 'getlocation' i.id %}"><h5 class="glyphicon glyphicon-map-marker"> {{i.hospitalname}}<h5></a>
+            <!-- <button type="button" class="btn btn-link">{{i.hospitalname}}</button>  -->
+            <br>
+            {{i.address1}}, {{i.address2}}, {{i.district}}, {{i.state}} 
+            <br>
+        </div> 
+        {%endfor%}
+    </div>
+    <div class="col-md-8">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15758.767538719041!2d77.41281875!3d9.091807350000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1628752196315!5m2!1sen!2sin" width="990" height="780" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <!-- </div> -->
+            
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .navbar {
+            margin-bottom: 50px;
+            background-color: #c2e4b1;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+        }
+        .table {
+            margin-top: 1%;
+            table-layout: auto;
+        }
+        .form-inline {
+            margin-top: 4%;
+            
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="navAdmin">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar-header">
+                <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
+            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">back</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <form class = "form-inline" action="country" method="POST">
+        {% csrf_token %}
+        <div class="text-right">
+            <button type="button" class="btn btn-info" data-toggle="modal" onclick="getvalue()" data-target="#myModal">chart</button>
+            <!-- <label for="country"></label>
+            <input type="text" class = "form-control" id="country" name="country" placeholder="country" size="50">
+            <button type="submit" class="btn btn-primary">search</button> -->
+        </div>
+    </form>
+
+    <table class="table table-striped" id = "mytable">
+        <tr>
+            <th>Country</th>
+            <th>TotalCases</th>
+            <th>NewCases</th>
+            <th>TotalDeaths</th>
+            <th>NewDeaths</th>
+            <th>TotalRecovered</th>
+            <th>NewRecovered</th>
+            <th>ActiveCases</th>
+            
+        </tr>
+        {% for i in c %}
+            {% for j in i %}
+            </tr id = "myrow">
+                <td id = "coun">{{ j.country }}</td>
+                <td id = "totalcase">{{ j.totalcases }}</td>
+                <td id = "newcase">{{ j.newcases }}</td>
+                <td id = "totaldeath">{{ j.totaldeaths }}</td>
+                <td id = "newdeath">{{ j.newdeaths }}</td>
+                <td id = "totalrecovered">{{ j.totalrecovered }}</td>
+                <td id = "newrecovered">{{ j.newrecovered }}</td>
+                <td id = "activecase">{{ j.activecases }}</td>
+                
+                <!-- <td><button type="button" data-toggle="modal" onclick="getvalue(
+                    document.getElementById('coun').innerHTML, 
+                    document.getElementById('totalcase').innerHTML,
+                    document.getElementById('totaldeath').innerHTML,
+                    document.getElementById('totalrecovered').innerHTML,
+                    document.getElementById('activecase').innerHTML)" data-target="#myModal" class="btn btn-info">chart</button></td> -->
+                <!-- <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">chart</button></td> -->
+                <!-- <td><a href="{% url 'chartdatamax' %}" data-toggle="modal" data-target="#myModal" value = "{{ i.totalcases }}">view</a></td> -->
+            </tr>
+            {%endfor%}
+        {%endfor%}
+
+    </table>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div id="myPlot" style="width:auto;max-width:700px"></div>
+            <script>                
+                function getvalue() {
+                    var coun1 = document.getElementById('mytable').rows[1].cells.item(0).innerHTML;
+                    var coun2 = document.getElementById('mytable').rows[2].cells.item(0).innerHTML;
+                    var coun3 = document.getElementById('mytable').rows[3].cells.item(0).innerHTML;
+
+                    var data1 = document.getElementById('mytable').rows[1].cells.item(1).innerHTML;
+                    var data2 = document.getElementById('mytable').rows[2].cells.item(1).innerHTML;
+                    var data3 = document.getElementById('mytable').rows[3].cells.item(1).innerHTML;
+                    
+                    var totalcase1 = parseInt(data1.replaceAll(',',''));
+                    var totalcase2 = parseInt(data2.replaceAll(',',''));
+                    var totalcase3 = parseInt(data3.replaceAll(',',''));
+                    //var activecase = parseInt(activecase.replaceAll(',',''));
+                
+                    var xArray = [coun1, coun2, coun3];
+                    var yArray = [totalcase1, totalcase2, totalcase3];
+                
+                    var layout = {title:"Totalcases"};
+                
+                    var data = [{labels:xArray, values:yArray, type:"pie"}];
+                
+                    Plotly.newPlot("myPlot", data, layout);
+                }
+            </script>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

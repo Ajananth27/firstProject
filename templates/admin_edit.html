@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .navbar {
+            margin-bottom: 50px;
+            background-color: #c2e4b1;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+        }
+        .table {
+            margin-top: 1%;
+            table-layout: auto;
+        }
+        .form-inline {
+            margin-top: 4%;
+            
+        }
+        
+        
+    </style>
+  </head>
+  <body>
+    <div class="navAdmin">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar-header">
+                <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
+            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="logout">Logout</a></li> -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- <div class="container"> -->
+        
+        <form class = "form-inline" action="hospital" method="POST">
+            
+            {% csrf_token %}
+            <div class="text-right">
+                <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">chart</button> -->
+                <label for="hospital name"></label>
+                <input type="text" class = "form-control" id="name" name="hname" placeholder="hospital name" size="50">
+                <button type="submit" class="btn btn-primary">search</button>
+            </div>
+        </form>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>id</th>
+                <th>HospitalName</th>
+                <th>hospital</th>
+                <th>Specialty</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>District</th>
+                <th>State</th>
+                <th>Action</th>  
+            </tr>
+            {% for i in data %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.hospitalname}}</td>
+                    <td>{{i.hospital}}</td>
+                    <td>{{i.specialty}}</td>
+                    <td>{{i.address1}}</td>
+                    <td>{{i.address2}}</td>
+                    <td>{{i.district}}</td>
+                    <td>{{i.state}}</td>
+                    <!-- <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">edit</button>
+                        /<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">delete</button></td> -->
+                    <td><a href="{% url 'editadminrecord' i.id %}">edit</a>
+                        / <a href="{% url 'deleterecord' i.id %}">delete</a></td>
+                </tr>
+            {%endfor%}
+
+        </table>
+        <ul class="pager">
+            <li class="previous"><a href="#">Previous</a></li>
+            <li class="next"><a href="#">Next</a></li>
+        </ul>
+    <!-- </div> -->
+
+    <!-- <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div id="piechart"></div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day'],
+                    ['Work', 50],
+                    ['Eat', 2],
+                    ['TV', 4],
+                    ['Gym', 2],
+                    ['Sleep', 8]
+                ]);
+
+  // Optional; add a title and set the width and height of the chart
+                var options = {'title':'My Average Day', 'width':550, 'height':500};
+
+  // Display the chart inside the <div> element with id="piechart"
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+                }
+            </script>
+        </div>
+    </div> -->
+
+    <!-- <script>
+        function editFunction() {
+            id = document.getElementById('myModal').id
+            
+        }
+
+        function openForm() {
+          document.getElementById("edit").style.display = "block";
+        }
+        
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+    </script>  -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

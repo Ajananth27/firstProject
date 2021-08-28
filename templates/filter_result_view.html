@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .navbar {
+            margin-bottom: 50px;
+            background-color: #c2e4b1;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+        }
+        .table {
+            margin-top: 4%;
+            table-layout: auto;
+        }
+
+        #data {
+            margin-top: 4%;
+        }
+        #location {
+            margin-top: 4%;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navAdmin">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar-header">
+                <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
+            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="#">back</a></li> -->
+                <li><a href="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="col-md-4" id = "data" data-spy="scroll" style="width: 500px; height: 770px; overflow:scroll;">
+        
+        <div class="container-fluid well">
+            <span class="glyphicon glyphicon-map-marker"></span> {{result_data.hospitalname}}, {{result_data.specialty}} <br>
+            <!-- <button type="button" class="btn btn-link">{{i.hospitalname}}</button>  -->
+            {{result_data.address1}}, {{result_data.address2}}, {{result_data.district}}, {{result_data.state}} 
+            <br><br>
+            <span class="glyphicon glyphicon-earphone"></span> {{result_data.contactno}} <br> <br>
+            <span class="glyphicon glyphicon-envelope"></span> {{result_data.mailid}}
+        </div> 
+        
+    </div>
+    <div class="col-md-8" id="location">
+        <iframe src="{{result_data.location}}" width="990" height="780" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+       
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

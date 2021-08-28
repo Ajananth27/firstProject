@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .navbar {
+            margin-bottom: 50px;
+            background-color: #c2e4b1;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navAdmin">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar-header">
+                <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
+            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="adminInserts/retrieve">View</a></li>
+                <li><a href="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- <ul class="nav nav-tabs">
+            <li class="nav-item"><a class = "nav-link active" data-toggle="tab" href="#create">New Hospital</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#edit">Edit</a></li>
+        </ul> -->
+        <div class="tab-content">
+            <div id="create" class="tab-pane fade in active">
+                <div class="row">
+                    <form action="/adminInserts/insert/" method="POST"><br>
+                        {% csrf_token %}
+                        <div class="container-fluid well">
+                            <div class="col-md-12">
+                                <h4>General Details :</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="HospitalName">HospitalName</label>
+                                <input id="HospitalName" name="HospitalName" type="text" class="form-control" placeholder="HospitalName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Hospital">GH/PH</label>
+                                <input id="Hospital" name="Hospital" type="text" class="form-control" placeholder="GH/PH" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Specialty">Specialty</label>
+                                <input id="Specialty" name="Specialty" type="text" class="form-control" placeholder="Specialty" required>
+                            </div>
+                        </div>
+                        
+                        <div class="container-fluid well">
+                            <div class="col-md-12">
+                                <h4>Address :</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Address1">Address-1</label>
+                                <input id="Address1" name="Address1" type="text" class="form-control" placeholder="Address1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Address2">Address-2</label>
+                                <input id="Address2" name="Address2" type="text" class="form-control" placeholder="Address2" required>
+                            </div> 
+                            <div class="col-md-6">
+                                <label for="District">District</label>
+                                <input id="District" name="District" type="text" class="form-control" placeholder="District" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="State">State</label>
+                                <input id="State" name="State" type="text" class="form-control" placeholder="State" required>
+                            </div> 
+                        </div>
+                        <div class="container-fluid well">
+                            <div class="col-md-12">
+                                <h4>Others :</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="PhoneNo">contact No</label>
+                                <input id="PhoneNo" name="PhoneNo" type="text" class="form-control" placeholder="PhoneNo" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mailid">Mail-id</label>
+                                <input id="mailid" name="mailid" type="text" class="form-control" placeholder="mailid" required>
+                            </div> 
+                        </div>
+                        <div class="container-fluid well">
+                            <div class="col-md-12">
+                                <h4>location :</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="location">location</label>
+                                <input id="location" name="location" type="text" class="form-control" placeholder="location" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="edit" class="tab-pane fade">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>id</th>
+                        <th>HospitalName</th>
+                        <th>Specialty</th>
+                        
+                    </tr>
+                    {% for d in data %}
+                    <tr>
+                        <td>{{d.id}}</td>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>
