@@ -22,6 +22,9 @@ def adminInserts(request):
 def retrieve(request):
     return render(request, 'demo.html')
 
+def home(request):
+    return redirect('/home')
+
 def login(request):
     if request.method == "POST":
         username = request.POST.get('username')

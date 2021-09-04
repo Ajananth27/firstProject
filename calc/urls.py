@@ -1,3 +1,4 @@
+from os import name
 from calc import views
 from django.urls import path
 from calc import views
@@ -5,6 +6,7 @@ from calc import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('home', views.login, name= 'login'),
+    path('Home', views.home, name='home'),
     path('logout', views.logout, name= 'logout'),
     path('register', views.registration, name= 'registration'),
     path('adminInserts', views.adminInserts, name = 'adminInserts'),

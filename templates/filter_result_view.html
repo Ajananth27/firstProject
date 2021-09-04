@@ -34,7 +34,9 @@
         }
         #location {
             margin-top: 4%;
+            
         }
+        
     </style>
   </head>
   <body>
@@ -43,27 +45,27 @@
             <nav class="navbar-header">
                 <div><a href="#" class="navbar-brand">Hospital Finder</a></div>
             </nav>
-            <ul class="nav navbar-nav navbar-right">
-                <!-- <li><a href="#">back</a></li> -->
-                <li><a href="logout">Logout</a></li>
+            <ul class="nav navbar-nav navbar-right" style="margin-top: 5px;">
+                
+                <li style="right: 20px;"><button onclick="window.history.back();" class="btn btn-primary" type="button">back</button></li>
             </ul>
         </nav>
     </div>
 
-    <div class="col-md-4" id = "data" data-spy="scroll" style="width: 500px; height: 770px; overflow:scroll;">
+    <!-- <div class="col-md-4" id = "data" data-spy="scroll" style="width: 500px; height: 770px; overflow:scroll;">
         
         <div class="container-fluid well">
             <span class="glyphicon glyphicon-map-marker"></span> {{result_data.hospitalname}}, {{result_data.specialty}} <br>
-            <!-- <button type="button" class="btn btn-link">{{i.hospitalname}}</button>  -->
+            
             {{result_data.address1}}, {{result_data.address2}}, {{result_data.district}}, {{result_data.state}} 
             <br><br>
             <span class="glyphicon glyphicon-earphone"></span> {{result_data.contactno}} <br> <br>
             <span class="glyphicon glyphicon-envelope"></span> {{result_data.mailid}}
         </div> 
         
-    </div>
-    <div class="col-md-8" id="location">
-        <iframe src="{{result_data.location}}" width="990" height="780" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div> -->
+    <div class="col-sm-12" id="location">
+        <iframe src="{{result_data.location}}" width="1500" height="670" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
        
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
